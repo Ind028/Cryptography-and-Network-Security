@@ -19,3 +19,4 @@ enc = playfair(s, k, 1)
 dec = playfair(enc, k, -1)
 print(f"Encrypted: {enc}")
 print(f"Decrypted: {dec}")
+#PLAYFAIR CIPHER
