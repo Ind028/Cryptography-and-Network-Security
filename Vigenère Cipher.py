@@ -32,6 +32,4 @@ key=input("Enter the key:")
 res3=vig_enc(text,key)
 print("Encrypted msg:",res3)
 print("dEncrypted msg:",vig_dec(res3,key))
-        
-print("Encrypted:", encrypted)
-print("Decrypted:", decrypted)
+  
