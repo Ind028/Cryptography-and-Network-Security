@@ -1,40 +1,49 @@
 # Caesar cipher function (used as component)
-def caesar_encrypt(char, shift):
-    if char.isalpha():
-        base = ord('A') if char.isupper() else ord('a')
-        return chr((ord(char) - base + shift) % 26 + base)
-    return char
-def vigenere_encrypt(plaintext, key):
-    ciphertext = ""
+def vigenere_encrypt(text, key):
+    result = ""
     key_index = 0
 
-    for char in plaintext:
+    for char in text:
         if char.isalpha():
             shift = ord(key[key_index % len(key)].lower()) - ord('a')
-            ciphertext += caesar_encrypt(char, shift)
+
+            if char.isupper():
+                result += chr((ord(char) - 65 + shift) % 26 + 65)
+            else:
+                result += chr((ord(char) - 97 + shift) % 26 + 97)
+
             key_index += 1
         else:
-            ciphertext += char
+            result += char
 
-    return ciphertext
-def vigenere_decrypt(ciphertext, key):
-    plaintext = ""
+    return result
+
+
+def vigenere_decrypt(text, key):
+    result = ""
     key_index = 0
 
-    for char in ciphertext:
+    for char in text:
         if char.isalpha():
             shift = ord(key[key_index % len(key)].lower()) - ord('a')
-            plaintext += caesar_encrypt(char, -shift)
+
+            if char.isupper():
+                result += chr((ord(char) - 65 - shift) % 26 + 65)
+            else:
+                result += chr((ord(char) - 97 - shift) % 26 + 97)
+
             key_index += 1
         else:
-            plaintext += char
+            result += char
 
-    return plaintext
+    return result
 
-text = input("Enter the message: ") 
-key = input("Enter the key: ") 
+
+text = input("Enter the message: ")
+key = input("Enter the key: ")
+
 encrypted = vigenere_encrypt(text, key)
 decrypted = vigenere_decrypt(encrypted, key)
-print("Plaintext :", text)
-print("Encrypted :", encrypted)
-print("Decrypted :", decrypted)
+
+print("Encrypted:", encrypted)
+print("Decrypted:", decrypted)
